@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Descubra Seu País!</title>
+  <style>
+    :root {
+      --primary: #00d4ff;
+      --dark: #1e3c72;
+      --darker: #0f1e3d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, var(--dark), var(--darker));
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 750px;
+      margin: 30px auto;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .subtitle { font-size: 1.1em; margin-bottom: 25px; opacity: 0.9; }
+    .question {
+      background: rgba(255,255,255,0.15);
+      padding: 18px;
+      border-radius: 12px;
+      margin: 20px 0;
+      text-align: left;
+      transition: all 0.3s;
+    }
+    .question:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .question p { font-weight: 600; margin-bottom: 12px; font-size: 1.15em; }
+    label {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 1.05em;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+    label:hover { background: rgba(255,255,255,0.1); }
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+    button {
+      margin: 30px auto;
+      display: block;
+      padding: 14px 40px;
+      font-size: 1.3em;
+      font-weight: bold;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,212,255,0.4);
+      transition: all 0.3s;
+    }
+    button:hover {
+      background: #00b0d4;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,212,255,0.6);
+    }
+    #result {
+      margin-top: 30px;
+      padding: 25px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 15px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .flag-img {
+      width: 120px;
+      height: 80px;
+      border-radius: 10px;
+      margin: 15px auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      object-fit: cover;
+    }
+    .country-name { font-size: 2em; margin: 10px 0; }
+    .country-info { font-size: 1.1em; line-height: 1.6; opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Descubra Seu País!</h1>
+    <p class="subtitle">Responda com sinceridade e vamos adivinhar de onde você é!</p>
+
+    <!-- Perguntas -->
+    <div class="question">
+      <p>1. Qual é a sua moeda?</p>
+      <label><input type="radio" name="moeda" value="real"> Real (R$) – Brasil</label>
+      <label><input type="radio" name="moeda" value="kwanza"> Kwanza – Angola</label>
+      <label><input type="radio" name="moeda" value="metical"> Metical – Moçambique</label>
+      <label><input type="radio" name="moeda" value="naira"> Naira – Nigéria</label>
+      <label><input type="radio" name="moeda" value="rand"> Rand – África do Sul</label>
+      <label><input type="radio" name="moeda" value="euro"> Euro (€) – Europa</label>
+      <label><input type="radio" name="moeda" value="outro"> Outra</label>
+    </div>
+
+    <div class="question">
+      <p>2. O português é idioma oficial?</p>
+      <label><input type="radio" name="idioma" value="sim"> Sim</label>
+      <label><input type="radio" name="idioma" value="nao"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>3. Seu país fica na África?</p>
+      <label><input type="radio" name="continente" value="africa"> Sim, na África!</label>
+      <label><input type="radio" name="continente" value="americasul"> América do Sul</label>
+      <label><input type="radio" name="continente" value="europa"> Europa</label>
+      <label><input type="radio" name="continente" value="outro"> Outro continente</label>
+    </div>
+
+    <div class="question">
+      <p>4. População acima de 200 milhões?</p>
+      <label><input type="radio" name="populacao" value="sim"> Sim (gigante!)</label>
+      <label><input type="radio" name="populacao" value="nao"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>5. Carnaval de rua é tradição forte?</p>
+      <label><input type="radio" name="carnaval" value="muito"> Sim, é épico!</label>
+      <label><input type="radio" name="carnaval" value="pouco"> Um pouco</label>
+      <label><input type="radio" name="carnaval" value="nao"> Quase nada</label>
+    </div>
+
+    <div class="question">
+      <p>6. Fuso horário GMT-3 (padrão)?</p>
+      <label><input type="radio" name="fuso" value="sim"> Sim</label>
+      <label><input type="radio" name="fuso" value="nao"> Não</label>
+    </div>
+
+    <div class="question">
+      <p>7. Inglês é idioma oficial?</p>
+      <label><input type="radio" name="ingles" value="sim"> Sim</label>
+      <label><input type="radio" name="ingles" value="nao"> Não</label>
+    </div>
+
+    <button onclick="identificarPais()">REVELAR MEU PAÍS!</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const paises = {
+      "Brasil": { bandeira: "https://flagcdn.com/w320/br.png", info: "Maior país da América do Sul, famoso pelo Carnaval, futebol e Amazônia." },
+      "Angola": { bandeira: "https://flagcdn.com/w320/ao.png", info: "País lusófono da África Austral, rico em petróleo e diamantes." },
+      "Moçambique": { bandeira: "https://flagcdn.com/w320/mz.png", info: "Na costa do Oceano Índico, com praias paradisíacas e cultura swahili." },
+      "Nigéria": { bandeira: "https://flagcdn.com/w320/ng.png", info: "Gigante da África, maior população do continente e potência em Nollywood." },
+      "África do Sul": { bandeira: "https://flagcdn.com/w320/za.png", info: "Nação arco-íris, com 11 idiomas oficiais e o Cabo da Boa Esperança." },
+      "Portugal": { bandeira: "https://flagcdn.com/w320/pt.png", info: "Berço do fado, pastéis de nata e da língua portuguesa." },
+      "Gana": { bandeira: "https://flagcdn.com/w320/gh.png", info: "Primeiro país africano independente, famoso pelo ouro e kente." },
+      "Quênia": { bandeira: "https://flagcdn.com/w320/ke.png", info: "Berço do safari, com o Monte Quênia e a Grande Migração." },
+      "Egito": { bandeira: "https://flagcdn.com/w320/eg.png", info: "Civilização milenar, pirâmides e o Rio Nilo." },
+      "Espanha": { bandeira: "https://flagcdn.com/w320/es.png", info: "País do flamenco, paella e touradas." }
+    };
+
+    function identificarPais() {
+      const respostas = {
+        moeda: document.querySelector('input[name="moeda"]:checked')?.value,
+        idioma: document.querySelector('input[name="idioma"]:checked')?.value,
+        continente: document.querySelector('input[name="continente"]:checked')?.value,
+        populacao: document.querySelector('input[name="populacao"]:checked')?.value,
+        carnaval: document.querySelector('input[name="carnaval"]:checked')?.value,
+        fuso: document.querySelector('input[name="fuso"]:checked')?.value,
+        ingles: document.querySelector('input[name="ingles"]:checked')?.value
+      };
+
+      if (Object.values(respostas).some(v => !v)) {
+        alert("Responda todas as perguntas!");
+        return;
+      }
+
+      let pais = "Outro país";
+      let bandeira = "https://flagcdn.com/w320/00.png";
+      let info = "Não identificado com precisão.";
+
+      // ÁFRICA
+      if (respostas.continente === "africa") {
+        if (respostas.idioma === "sim") {
+          if (respostas.moeda === "kwanza") { pais = "Angola"; }
+          else if (respostas.moeda === "metical") { pais = "Moçambique"; }
+          else { pais = "Cabo Verde / Guiné-Bissau"; info = "Países lusófonos pequenos e incríveis!"; }
+        } else {
+          if (respostas.moeda === "naira" && respostas.populacao === "sim") { pais = "Nigéria"; }
+          else if (respostas.moeda === "rand" && respostas.ingles === "sim") { pais = "África do Sul"; }
+          else if (respostas.ingles === "sim") { pais = "Gana"; }
+          else { pais = "Egito"; }
+        }
+
+      // AMÉRICA DO SUL
+      } else if (respostas.continente === "americasul") {
+        if (respostas.idioma === "sim" && respostas.moeda === "real" && respostas.populacao === "sim" && respostas.fuso === "sim" && respostas.carnaval === "muito") {
+          pais = "Brasil";
+        } else {
+          pais = "Argentina / Chile / outro";
+          info = "País sul-americano com paisagens incríveis!";
+        }
+
+      // EUROPA
+      } else if (respostas.continente === "europa") {
+        if (respostas.idioma === "sim") { pais = "Portugal"; }
+        else if (respostas.moeda === "euro") { pais = "Espanha"; }
+        else { pais = "Outro país europeu"; }
+      }
+
+      // Buscar dados
+      const dados = paises[pais] || { bandeira: "https://flagcdn.com/w320/xx.png", info: info };
+      bandeira = dados.bandeira;
+      info = dados.info || info;
+
+      document.getElementById("result").innerHTML = `
+        <img src="${bandeira}" alt="Bandeira" class="flag-img">
+        <div class="country-name">${pais}</div>
+        <div class="country-info">${info}</div>
+        <p><small>Baseado nas suas respostas</small></p>
+      `;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
